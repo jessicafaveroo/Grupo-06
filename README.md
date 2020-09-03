@@ -1,2 +1,2 @@
-# Grupo 06
+# Repositório do Grupo 06
 
