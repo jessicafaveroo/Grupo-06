@@ -7,6 +7,8 @@
 *.obj
 *.elf
 *bin/
+*.depend
+*.layout
 
 # Linker output
 *.ilk
