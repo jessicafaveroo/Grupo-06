@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1599790758 source:/home/thiagosalvador/Samuel/RPIII/grupo-06/Entrega 1/Uni Filmes/main.c
+	<stdio.h>
+	<stdlib.h>
+
