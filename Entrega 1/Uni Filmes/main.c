@@ -7,47 +7,47 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
     printf("Funcao de locacao \n\n");
 }
 
-void Entrega_filmes() /* recoloca o filme na lista. */
+void entrega_filmes() /* recoloca o filme na lista. */
 {
     printf("Funcao Entrega de filmes \n\n");
 }
 
-void Busca_titulo() /* Busca filme pelo titulo. */
+void busca_titulo() /* Busca filme pelo titulo. */
 {
     printf("Funcao Busca de um filme por titulo \n\n");
 }
 
-void Busca_codigo() /* Busca filme pelo codigo. */
+void busca_codigo() /* Busca filme pelo codigo. */
 {
     printf("Funcao Busca de um filme por codigo \n\n");
 }
 
-void Busca_ano() /* Busca filme pelo ano. */
+void busca_ano() /* Busca filme pelo ano. */
 {
     printf("Funcao Busca de um filme por ano \n\n");
 }
 
-void Busca_quantidade() /* Busca filme pela quantidade. */
+void busca_quantidade() /* Busca filme pela quantidade. */
 {
     printf("Funcao Busca de um filme por quantidade \n\n");
 }
 
-void Busca_genero() /* Busca filme pelo genero. */
+void busca_genero() /* Busca filme pelo genero. */
 {
     printf("Funcao Busca de um filme por genero \n\n");
 }
 
-void Impressao() /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
+void impressao() /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
 {
     printf("Funcao Impressao \n\n");
 }
 
-void Relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
+void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
 {
     printf("Funcao Relatorios \n\n");
 }
 
-void Acervo_completo() /* imprime um backup do acervo atual com nomes e quantidades atualizadas. */
+void acervo_completo() /* imprime um backup do acervo atual com nomes e quantidades atualizadas. */
 {
     printf("Funcao Acervo completo \n\n");
 }
@@ -79,7 +79,7 @@ int main ()
 
         case 0:
             printf("voce pediu para sair, fechando programa...\n");
-            Sleep(3000);
+
             exit(0);
             break;
 
@@ -88,7 +88,7 @@ int main ()
             break;
 
         case 2:
-            Entrega_filmes();
+            entrega_filmes();
             break;
 
         case 3:
@@ -109,28 +109,28 @@ int main ()
                 switch(busca)
                 {
                 case 1:
-                    Busca_codigo();
+                    busca_codigo();
                     break;
 
                 case 2:
-                    Busca_titulo();
+                    busca_titulo();
                     break;
 
                 case 3:
-                    Busca_ano();
+                    busca_ano();
                     break;
 
                 case 4:
-                    Busca_genero();
+                    busca_genero();
                     break;
 
                 case 5:
-                    Busca_quantidade();
+                    busca_quantidade();
                     break;
 
                 case 6:
                     printf("voce pediu para sair, fechando programa...\n");
-                    Sleep(3000);
+
                     exit(0);
                     break;
 
@@ -141,15 +141,15 @@ int main ()
             while(busca);
 
         case 4:
-            Impressao();
+            impressao();
             break;
 
         case 5:
-            Relatorios();
+            relatorios();
             break;
 
         case 6:
-            Acervo_completo();
+            acervo_completo();
             break;
 
         default:
