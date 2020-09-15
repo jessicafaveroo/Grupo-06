@@ -15,7 +15,6 @@ void main() {
         printf("Erro na leitura do arquivo\n");
         return;
     }
-    //i = 1;
     while(!feof(arq)) {
         result = fgets(Linha, 100, arq);
         if(result) {
