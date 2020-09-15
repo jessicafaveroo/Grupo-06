@@ -114,6 +114,19 @@ typedef struct {
 void entrega_filmes() /* recoloca o filme na lista. */
 {
     printf("Funcao Entrega de filmes \n\n");
+
+    FILE *arquivo_entrada_filmes;
+    arquivo_entrada_filmes = fopen("entrada.txt", "r");
+
+    if(arquivo_entrada_filmes == NULL){
+        printf("Erro ao abri arquivo");
+        system("pause");
+        return 0;
+    }
+
+    printf("\n Informe o código do filme: ");
+
+
 }
 
 void busca_titulo() /* Busca filme pelo titulo. */
