@@ -2,7 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include <locale.h>
-#include <string.h>
+
+typedef struct filme FILME;
+struct filme{
+    int codigo;
+    char titulo[200];
+    int quantidade;
+    int ano;
+    char genero[50];
+};
 
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
@@ -13,9 +21,9 @@ typedef struct {
     int quantidade;
     int ano;
     char genero[50];
-} Filmes;
+} Filme;
 
-    Filmes filmes[2];
+    Filme filmes[2];
     char titulo[200];
     int codigo[10];
     int quantidade[10];
@@ -113,7 +121,41 @@ typedef struct {
 
 void entrega_filmes() /* recoloca o filme na lista. */
 {
-    printf("Funcao Entrega de filmes \n\n");
+
+   // printf("\n Informe o código do filme: ");
+
+    // abre arquivo em mode de leitura
+    FILE *arquivo_entrada_filmes;
+    FILME film;
+    arquivo_entrada_filmes = fopen("entrada.txt", "r");
+    char filme[50];
+
+
+    //Verifica se o arquivo não é nulo
+    if(arquivo_entrada_filmes == NULL){
+        printf("Erro ao abri arquivo");
+        system("pause");
+        return 0;
+    }
+
+
+
+  /* while(fread(&film, sizeof(FILME),1, arquivo_entrada_filmes)==1){
+        printf("%d", film.titulo);
+    } */
+
+    //enquanto não chegar ao fim do arquivo o looping ser executado
+    while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
+    printf("%s", filme );
+
+
+    //fecha o arquivo
+    fclose(arquivo_entrada_filmes);
+
+    //stop na tela
+    getchar();
+    return(0);
+
 }
 
 void busca_titulo() /* Busca filme pelo titulo. */
