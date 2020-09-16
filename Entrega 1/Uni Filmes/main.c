@@ -66,13 +66,6 @@ void carregarDados(){
 
     // gera um código sequencial para o elemento e passa para o próximo elemento
     titulos[i].codigo = id++;
-       printf("%d\n%s\n%s\n%s\n%s\n",
-        titulos[i].codigo,
-        titulos[i].titulo,
-        titulos[i].ano,
-        titulos[i].quantidade,
-        titulos[i].genero
-        );
     i++;
   }
     fclose(arquivoEntrada);
