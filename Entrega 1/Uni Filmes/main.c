@@ -16,7 +16,7 @@ struct filme{
 struct filme titulos[];
 
 void carregarDados(){
-    int id = 0;
+    int  id = 0;
     const char separador[2] = ";";
     char *token;
     char linha[90];
@@ -43,15 +43,16 @@ void carregarDados(){
 
    //insere cada atributo no elemento tipo filme
    switch(j)
+
         {
             case 0:
                 titulos[i].titulo = token;
                 break;
             case 1:
-                titulos[i].quantidade = token;
+                titulos[i].ano = token;
                 break;
             case 2:
-                titulos[i].ano = token;
+                titulos[i].quantidade = token;
                 break;
             case 3:
                 titulos[i].genero = token;
@@ -62,8 +63,16 @@ void carregarDados(){
         token = strtok(NULL, separador);
         j++;
    }
+
     // gera um código sequencial para o elemento e passa para o próximo elemento
-    titulos[i].codigo = id ++;
+    titulos[i].codigo = id++;
+       printf("%d\n%s\n%s\n%s\n%s\n",
+        titulos[i].codigo,
+        titulos[i].titulo,
+        titulos[i].ano,
+        titulos[i].quantidade,
+        titulos[i].genero
+        );
     i++;
   }
     fclose(arquivoEntrada);
