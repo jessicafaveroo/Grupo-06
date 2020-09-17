@@ -3,19 +3,79 @@
 #include <string.h>
 #include <locale.h>
 
-typedef struct filme FILME;
+
 struct filme{
-    int codigo;
-    char titulo[200];
-    int quantidade;
-    int ano;
-    char genero[50];
+    int  codigo;
+    char *titulo;
+    char *quantidade;
+    char *ano;
+    char *genero;
+
 };
+
+struct filme titulos[];
+
+void carregarDados(){
+    int  id = 0;
+    const char separador[2] = ";";
+    char *token;
+    char linha[90];
+    char *resultado;
+
+    FILE *arquivoEntrada;
+    if((arquivoEntrada = fopen("entrada.txt", "r")) == NULL){
+        printf("Erro ao abrir o arquivo.\n");
+    }
+
+   token = strtok(arquivoEntrada, separador);
+
+   //variável i percorre cada Struct ou seja cada linha
+   int i = 0;
+   //tratamento para não ultrapassar o tamanho da lista
+   while (!feof(arquivoEntrada) && i < 42){
+      resultado = fgets(linha, 90, arquivoEntrada);
+      if (resultado)
+      token = strtok(resultado, separador);
+
+   // estrutura de loop para um elemento inteiro do tipo filme
+   int j = 0;
+   while( token != NULL ){
+
+   //insere cada atributo no elemento tipo filme
+   switch(j)
+
+        {
+            case 0:
+                titulos[i].titulo = token;
+                break;
+            case 1:
+                titulos[i].ano = token;
+                break;
+            case 2:
+                titulos[i].quantidade = token;
+                break;
+            case 3:
+                titulos[i].genero = token;
+                break;
+
+        }
+
+        token = strtok(NULL, separador);
+        j++;
+   }
+
+    // gera um código sequencial para o elemento e passa para o próximo elemento
+    titulos[i].codigo = id++;
+    i++;
+  }
+    fclose(arquivoEntrada);
+
+}
 
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
 
-typedef struct {
+/*typedef struct {
     int codigo;
     char titulo[200];
     int quantidade;
@@ -115,48 +175,32 @@ typedef struct {
             printf(" \n ------------------------------------------------------------------------");
         }
 
-    printf("\n \n");
+    printf("\n \n");*/
 
 }
 
 void entrega_filmes() /* recoloca o filme na lista. */
 {
 
-   // printf("\n Informe o código do filme: ");
-
-    // abre arquivo em mode de leitura
-    FILE *arquivo_entrada_filmes;
-    FILME film;
-    arquivo_entrada_filmes = fopen("entrada.txt", "r");
-    char filme[50];
-
-
-    //Verifica se o arquivo não é nulo
-    if(arquivo_entrada_filmes == NULL){
-        printf("Erro ao abri arquivo");
-        system("pause");
-        return 0;
-    }
-
-
+}
 
   /* while(fread(&film, sizeof(FILME),1, arquivo_entrada_filmes)==1){
         printf("%d", film.titulo);
     } */
 
     //enquanto não chegar ao fim do arquivo o looping ser executado
-    while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
-    printf("%s", filme );
+ //   while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
+  //  printf("%s", filme );
 
 
     //fecha o arquivo
-    fclose(arquivo_entrada_filmes);
+    //fclose(arquivo_entrada_filmes);
 
     //stop na tela
-    getchar();
-    return(0);
+  //  getchar();
+    //return(0);
 
-}
+
 
 void busca_titulo() /* Busca filme pelo titulo. */
 {
@@ -198,8 +242,10 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
     printf("Funcao Acervo completo \n\n");
 }
 
+
 int main ()
 {
+carregarDados();
 
     int busca;
     int opcao;
