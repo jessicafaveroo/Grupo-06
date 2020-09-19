@@ -4,7 +4,8 @@
 #include <locale.h>
 
 
-struct filme{
+struct filme
+{
     int  codigo;
     char *titulo;
     char *quantidade;
@@ -15,7 +16,8 @@ struct filme{
 
 struct filme titulos[];
 
-void carregarDados(){
+void carregarDados()
+{
     int  id = 0;
     const char separador[2] = ";";
     char *token;
@@ -23,28 +25,31 @@ void carregarDados(){
     char *resultado;
 
     FILE *arquivoEntrada;
-    if((arquivoEntrada = fopen("entrada.txt", "r")) == NULL){
+    if((arquivoEntrada = fopen("entrada.txt", "r")) == NULL)
+    {
         printf("Erro ao abrir o arquivo.\n");
     }
 
-   token = strtok(arquivoEntrada, separador);
+    token = strtok(arquivoEntrada, separador);
 
-   //variável i percorre cada Struct ou seja cada linha
-   int i = 0;
-   //tratamento para não ultrapassar o tamanho da lista
-   while (!feof(arquivoEntrada) && i < 42){
-      resultado = fgets(linha, 90, arquivoEntrada);
-      if (resultado)
-      token = strtok(resultado, separador);
+    //variável i percorre cada Struct ou seja cada linha
+    int i = 0;
+    //tratamento para não ultrapassar o tamanho da lista
+    while (!feof(arquivoEntrada) && i < 42)
+    {
+        resultado = fgets(linha, 90, arquivoEntrada);
+        if (resultado)
+            token = strtok(resultado, separador);
 
-   // estrutura de loop para um elemento inteiro do tipo filme
-   int j = 0;
-   while( token != NULL ){
-
-   //insere cada atributo no elemento tipo filme
-   switch(j)
-
+        // estrutura de loop para um elemento inteiro do tipo filme
+        int j = 0;
+        while( token != NULL )
         {
+
+            //insere cada atributo no elemento tipo filme
+            switch(j)
+
+            {
             case 0:
                 titulos[i].titulo = token;
                 break;
@@ -58,16 +63,16 @@ void carregarDados(){
                 titulos[i].genero = token;
                 break;
 
+            }
+
+            token = strtok(NULL, separador);
+            j++;
         }
 
-        token = strtok(NULL, separador);
-        j++;
-   }
-
-    // gera um código sequencial para o elemento e passa para o próximo elemento
-    titulos[i].codigo = id++;
-    i++;
-  }
+        // gera um código sequencial para o elemento e passa para o próximo elemento
+        titulos[i].codigo = id++;
+        i++;
+    }
     fclose(arquivoEntrada);
 
 }
@@ -75,95 +80,72 @@ void carregarDados(){
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
 
-/*typedef struct {
-    int codigo;
-    char titulo[200];
-    int quantidade;
-    int ano;
-    char genero[50];
-} Filme;
+    /*typedef struct {
+        int codigo;
+        char titulo[200];
+        int quantidade;
+        int ano;
+        char genero[50];
+    } Filme;
 
-    Filme filmes[2];
-    char titulo[200];
-    int codigo[10];
-    int quantidade[10];
-    int ano[1000];
-    char genero[200];
+        Filme filmes[2];
+        char titulo[200];
+        int codigo[10];
+        int quantidade[10];
+        int ano[1000];
+        char genero[200];
 
-    int codigoDigitado;
+        int codigoDigitado;
 
-    void remover(int i){
+        void remover(int i){
 
-        filmes[i].quantidade = filmes[i].quantidade - 1;
+            filmes[i].quantidade = filmes[i].quantidade - 1;
 
-    }
+        }
 
-    printf("Funcao de locacao \n \n");
+        printf("Funcao de locacao \n \n");
 
-    for(int i=0; i<2; i++) {
-        filmes[i].codigo = 0;
-        filmes[i].titulo, "*";
-        filmes[i].ano = 0;
-        filmes[i].quantidade = 0;
-        filmes[i].genero, "*";
-    }
+        for(int i=0; i<2; i++) {
+            filmes[i].codigo = 0;
+            filmes[i].titulo, "*";
+            filmes[i].ano = 0;
+            filmes[i].quantidade = 0;
+            filmes[i].genero, "*";
+        }
 
-    for(int i=0; i<2; i++) {
-        printf(" \n O código do filme é: %d ", filmes[i].codigo);
-        printf(" \n O titulo do filme é: %c ", filmes[i].titulo);
-        printf(" \n O genero é: %c ", filmes[i].genero);
-        printf(" \n O ano do filme é: %d", filmes[i].ano);
-        printf(" \n Quantidades é: %d", filmes[i].quantidade);
-        printf(" \n ------------------------------------------------------------------------");
-    }
+        for(int i=0; i<2; i++) {
+            printf(" \n O código do filme é: %d ", filmes[i].codigo);
+            printf(" \n O titulo do filme é: %c ", filmes[i].titulo);
+            printf(" \n O genero é: %c ", filmes[i].genero);
+            printf(" \n O ano do filme é: %d", filmes[i].ano);
+            printf(" \n Quantidades é: %d", filmes[i].quantidade);
+            printf(" \n ------------------------------------------------------------------------");
+        }
 
-    printf(" \n \n");
+        printf(" \n \n");
 
-    for(int i=0; i<2; i++) {
-        printf(" Digite o código do filme: ");
-        fflush(stdin);
-        //                                   gets(&filmes[i].codigo);
-        scanf("%d%*c", &filmes[i].codigo);
-        printf(" Digite o titulo do filme: ");
-        fflush(stdin);
-        gets(&filmes[i].titulo);
-        //                                   scanf("%c%*c", &filmes[i].titulo);
-        printf(" Digite o genero do filme: ");
-        fflush(stdin);
-        gets(&filmes[i].genero);
-        //                                   scanf("%c%*c", &filmes[i].genero);
-        printf(" Digite o ano do filme: ");
-        fflush(stdin);
-        //                                   gets(&filmes[i].ano);
-        scanf("%d%*c", &filmes[i].ano);
-        printf(" Digite a quantidade: ");
-        fflush(stdin);
-        //                                   gets(&filmes[i].quantidade);
-        scanf("%d%*c", &filmes[i].quantidade);
-        printf(" \n ------------------------------------------------------------------------\n");
-    }
-
-    for(int i=0; i<2; i++) {
-        printf(" \n O código do filme é: %d ", filmes[i].codigo);
-        printf(" \n O titulo do filme é: %s ", filmes[i].titulo);
-        printf(" \n O genero do filme é: %s ", filmes[i].genero);
-        printf(" \n O ano do filme é: %d", filmes[i].ano);
-        printf(" \n A quantidade é: %d", filmes[i].quantidade);
-        printf(" \n ------------------------------------------------------------------------");
-    }
-
-    printf(" \n ");
-
-        printf(" \n Digite o codigo do filme: ");
-        scanf("%d", &codigoDigitado);
-
-        for(int i = 0; i < 2; i++){
-            if (filmes[i].codigo == codigoDigitado){
-            remover(i);
-            printf("\n Filme Alugado!!\n");
-            } else {
-                printf("\n Filme nao encontrado!! \n");
-            }
+        for(int i=0; i<2; i++) {
+            printf(" Digite o código do filme: ");
+            fflush(stdin);
+            //                                   gets(&filmes[i].codigo);
+            scanf("%d%*c", &filmes[i].codigo);
+            printf(" Digite o titulo do filme: ");
+            fflush(stdin);
+            gets(&filmes[i].titulo);
+            //                                   scanf("%c%*c", &filmes[i].titulo);
+            printf(" Digite o genero do filme: ");
+            fflush(stdin);
+            gets(&filmes[i].genero);
+            //                                   scanf("%c%*c", &filmes[i].genero);
+            printf(" Digite o ano do filme: ");
+            fflush(stdin);
+            //                                   gets(&filmes[i].ano);
+            scanf("%d%*c", &filmes[i].ano);
+            printf(" Digite a quantidade: ");
+            fflush(stdin);
+            //                                   gets(&filmes[i].quantidade);
+            scanf("%d%*c", &filmes[i].quantidade);
+            printf(" \n ------------------------------------------------------------------------\n");
         }
 
         for(int i=0; i<2; i++) {
@@ -175,7 +157,30 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
             printf(" \n ------------------------------------------------------------------------");
         }
 
-    printf("\n \n");*/
+        printf(" \n ");
+
+            printf(" \n Digite o codigo do filme: ");
+            scanf("%d", &codigoDigitado);
+
+            for(int i = 0; i < 2; i++){
+                if (filmes[i].codigo == codigoDigitado){
+                remover(i);
+                printf("\n Filme Alugado!!\n");
+                } else {
+                    printf("\n Filme nao encontrado!! \n");
+                }
+            }
+
+            for(int i=0; i<2; i++) {
+                printf(" \n O código do filme é: %d ", filmes[i].codigo);
+                printf(" \n O titulo do filme é: %s ", filmes[i].titulo);
+                printf(" \n O genero do filme é: %s ", filmes[i].genero);
+                printf(" \n O ano do filme é: %d", filmes[i].ano);
+                printf(" \n A quantidade é: %d", filmes[i].quantidade);
+                printf(" \n ------------------------------------------------------------------------");
+            }
+
+        printf("\n \n");*/
 
 }
 
@@ -184,21 +189,21 @@ void entrega_filmes() /* recoloca o filme na lista. */
 
 }
 
-  /* while(fread(&film, sizeof(FILME),1, arquivo_entrada_filmes)==1){
-        printf("%d", film.titulo);
-    } */
+/* while(fread(&film, sizeof(FILME),1, arquivo_entrada_filmes)==1){
+      printf("%d", film.titulo);
+  } */
 
-    //enquanto não chegar ao fim do arquivo o looping ser executado
- //   while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
-  //  printf("%s", filme );
+//enquanto não chegar ao fim do arquivo o looping ser executado
+//   while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
+//  printf("%s", filme );
 
 
-    //fecha o arquivo
-    //fclose(arquivo_entrada_filmes);
+//fecha o arquivo
+//fclose(arquivo_entrada_filmes);
 
-    //stop na tela
-  //  getchar();
-    //return(0);
+//stop na tela
+//  getchar();
+//return(0);
 
 
 
@@ -245,7 +250,7 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
 
 int main ()
 {
-carregarDados();
+    carregarDados();
 
     int busca;
     int opcao;
@@ -261,10 +266,11 @@ carregarDados();
         printf("5- Relatorios \n");
         printf("6- Acervo completo \n");
         printf("0- Sair \n");
-        fflush(stdin); /*limpar o buffer da entrada padrao para evitar que se for digitado letra o programa entre em loop.*/
+        /*fflush(stdin); /* WINDOWS limpar o buffer da entrada padrao para evitar que se for digitado letra o programa entre em loop.*/
 
         scanf("%d", &opcao);
-        system("cls");
+        __fpurge(stdin);  /*limpar o buffer da entrada padrao para evitar que se for digitado letra o programa entre em loop.*/
+        system("clear");
 
         switch(opcao)
         {
@@ -288,15 +294,19 @@ carregarDados();
             {
 
                 printf("Buscar por codigo ou titulo \n");
-                printf("1- Buscar por codigo \n");
-                printf("2- Buscar por titulo \n");
+                printf("1- Buscar por código \n");
+                printf("2- Buscar por título \n");
                 printf("3- Buscar por ano \n");
-                printf("4- Buscar por genero \n");
+                printf("4- Buscar por gênero \n");
                 printf("5- Buscar por quantidade \n");
-                printf("6- Sair \n");
+                printf("6- voltar \n");
+                printf("0- Sair \n");
+                /*fflush(stdin);*/
+
 
                 scanf("%d", &busca);
-                system("cls || clear");
+                __fpurge(stdin);
+                system("clear");
 
                 switch(busca)
                 {
@@ -321,16 +331,21 @@ carregarDados();
                     break;
 
                 case 6:
-                    printf("voce pediu para sair, fechando programa...\n");
+                    printf("você pediu para voltar ao menu principal \n\n");
+                    busca = 0;
+                    break;
 
+                case 0:
+                    printf("você pediu para sair, fechando programa...\n");
                     exit(0);
                     break;
 
                 default:
-                    printf("Digite uma opcao valida \n\n");
+                    printf("Digite uma opção válida \n\n");
                 }
             }
-            while(busca);
+            while(busca!= 0);
+            break;
 
         case 4:
             impressao();
