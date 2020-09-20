@@ -257,15 +257,15 @@ int main ()
 
     do
     {
-        printf("Sistema de Locacoes \n\n");
-        printf("Digite a opcao desejada \n");
-        printf("1- Locacao \n");
+        printf("Sistema de Locações \n\n");
+        printf("1- Locação \n");
         printf("2- Entrega de filmes \n");
-        printf("3- Busca de um titulo \n");
-        printf("4- Impressao \n");
-        printf("5- Relatorios \n");
+        printf("3- Busca de um título \n");
+        printf("4- Impressão \n");
+        printf("5- Relatório \n");
         printf("6- Acervo completo \n");
-        printf("0- Sair \n");
+        printf("0- Sair \n\n");
+        printf("Digite a opção desejada: ");
         /*fflush(stdin); /* WINDOWS limpar o buffer da entrada padrao para evitar que se for digitado letra o programa entre em loop.*/
 
         scanf("%d", &opcao);
@@ -276,8 +276,7 @@ int main ()
         {
 
         case 0:
-            printf("voce pediu para sair, fechando programa...\n");
-
+            printf("Você pediu para sair, fechando programa...\n");
             exit(0);
             break;
 
@@ -293,14 +292,15 @@ int main ()
             do
             {
 
-                printf("Buscar por codigo ou titulo \n");
+                printf("Menu de busca: \n\n");
                 printf("1- Buscar por código \n");
                 printf("2- Buscar por título \n");
                 printf("3- Buscar por ano \n");
                 printf("4- Buscar por gênero \n");
                 printf("5- Buscar por quantidade \n");
                 printf("6- voltar \n");
-                printf("0- Sair \n");
+                printf("0- Sair \n\n");
+                printf("Digite a opção desejada: ");
                 /*fflush(stdin);*/
 
 
@@ -336,7 +336,7 @@ int main ()
                     break;
 
                 case 0:
-                    printf("você pediu para sair, fechando programa...\n");
+                    printf("Você pediu para sair, fechando programa...\n");
                     exit(0);
                     break;
 
@@ -360,10 +360,9 @@ int main ()
             break;
 
         default:
-            printf("Digite uma opcao valida \n\n");
+            printf("Digite uma opção válida \n\n");
+
         }
+        while(opcao != 0);
 
     }
-    while(opcao != 0);
-
-}
