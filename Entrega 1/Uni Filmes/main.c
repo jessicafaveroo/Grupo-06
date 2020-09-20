@@ -12,7 +12,7 @@ struct filme
     char *ano;
     char *genero;
 
-};
+}Filme;
 
 struct filme titulos[];
 
@@ -69,15 +69,26 @@ void carregarDados()
             j++;
         }
 
-        // gera um código sequencial para o elemento e passa para o próximo elemento
+        // gera um código sequencial para o elemento e passa para a próxima linha do arquivo
         titulos[i].codigo = id++;
-        i++;
-    }
+
+        printf("%d\n%s\n%s\n%s\n%s\n",
+        titulos[i].codigo,
+        titulos[i].titulo,
+        titulos[i].quantidade,
+        titulos[i].ano,
+        titulos[i].genero
+        );
+
+     i++;
+  }
+  printf("----------- Base de dados carregada ------------\n\n");
+
     fclose(arquivoEntrada);
 
 }
 
-void locacao() /*retira o filme da lista de filmes a serem locados.*/
+void locacao(Filme titulos[]) /*retira o filme da lista de filmes a serem locados.*/
 {
 
     /*typedef struct {
@@ -250,7 +261,10 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
 
 int main ()
 {
-    carregarDados();
+
+    Filme titulos[41];
+    carregarDados(titulos);
+
 
     int busca;
     int opcao;
@@ -281,7 +295,7 @@ int main ()
             break;
 
         case 1:
-            locacao();
+            locacao(titulos);
             break;
 
         case 2:
