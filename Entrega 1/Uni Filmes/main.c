@@ -4,18 +4,16 @@
 #include <locale.h>
 
 
-struct filme{
+ typedef struct filme{
     int  codigo;
     char *titulo;
     char *quantidade;
     char *ano;
     char *genero;
 
-};
+}Filme;
 
-struct filme titulos[];
-
-void carregarDados(){
+void carregarDados(Filme titulos[]){
     int  id = 0;
     const char separador[2] = ";";
     char *token;
@@ -29,10 +27,10 @@ void carregarDados(){
 
    token = strtok(arquivoEntrada, separador);
 
-   //variável i percorre cada Struct ou seja cada linha
+   //variável i para percorrer cada linha
    int i = 0;
    //tratamento para não ultrapassar o tamanho da lista
-   while (!feof(arquivoEntrada) && i < 42){
+   while (!feof(arquivoEntrada) && i < 41){
       resultado = fgets(linha, 90, arquivoEntrada);
       if (resultado)
       token = strtok(resultado, separador);
@@ -64,16 +62,29 @@ void carregarDados(){
         j++;
    }
 
-    // gera um código sequencial para o elemento e passa para o próximo elemento
-    titulos[i].codigo = id++;
-    i++;
+        // gera um código sequencial para o elemento e passa para a próxima linha do arquivo
+        titulos[i].codigo = id++;
+
+        printf("%d\n%s\n%s\n%s\n%s\n",
+        titulos[i].codigo,
+        titulos[i].titulo,
+        titulos[i].quantidade,
+        titulos[i].ano,
+        titulos[i].genero
+        );
+
+     i++;
   }
+  printf("----------- Base de dados carregada ------------\n\n");
+
     fclose(arquivoEntrada);
 
 }
 
-void locacao() /*retira o filme da lista de filmes a serem locados.*/
+void locacao(Filme titulos[]) /*retira o filme da lista de filmes a serem locados.*/
 {
+
+
 
 /*typedef struct {
     int codigo;
@@ -245,7 +256,10 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
 
 int main ()
 {
-carregarDados();
+
+    Filme titulos[41];
+    carregarDados(titulos);
+
 
     int busca;
     int opcao;
@@ -276,7 +290,7 @@ carregarDados();
             break;
 
         case 1:
-            locacao();
+            locacao(titulos);
             break;
 
         case 2:
