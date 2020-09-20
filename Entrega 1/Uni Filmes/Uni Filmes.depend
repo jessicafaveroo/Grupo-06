@@ -3,3 +3,9 @@
 	<stdio.h>
 	<stdlib.h>
 
+1600480522 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+
