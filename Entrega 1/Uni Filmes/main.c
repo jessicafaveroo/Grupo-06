@@ -88,7 +88,7 @@ void carregarDados()
 
 }
 
-void locacao(Filme titulos[]) /*retira o filme da lista de filmes a serem locados.*/
+void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
 
     /*typedef struct {
@@ -262,9 +262,7 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
 int main ()
 {
 
-    Filme titulos[41];
-    carregarDados(titulos);
-
+    carregarDados();
 
     int busca;
     int opcao;
@@ -375,7 +373,7 @@ int main ()
 
         default:
             printf("Digite uma opção válida \n\n");
-
+            }
         }
         while(opcao != 0);
 
