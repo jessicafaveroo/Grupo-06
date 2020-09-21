@@ -89,109 +89,20 @@ void carregarDados(node_filmes * inicio)
 
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
+    struct filme *teste;
+    int idFilme;
 
-    /*typedef struct {
-        int codigo;
-        char titulo[200];
-        int quantidade;
-        int ano;
-        char genero[50];
-    } Filme;
+   printf("Codigo do filme:\n");
+   scanf("%d", &idFilme);
 
-        Filme filmes[2];
-        char titulo[200];
-        int codigo[10];
-        int quantidade[10];
-        int ano[1000];
-        char genero[200];
-
-        int codigoDigitado;
-
-        void remover(int i){
-
-            filmes[i].quantidade = filmes[i].quantidade - 1;
-
+    for(int i = 0; i < 41; ++i){
+        if(titulos[i].codigo == idFilme){
+            printf("ok \n");
         }
+        printf("nao ok \n");
+    }
 
-        printf("Funcao de locacao \n \n");
-
-        for(int i=0; i<2; i++) {
-            filmes[i].codigo = 0;
-            filmes[i].titulo, "*";
-            filmes[i].ano = 0;
-            filmes[i].quantidade = 0;
-            filmes[i].genero, "*";
-        }
-
-        for(int i=0; i<2; i++) {
-            printf(" \n O código do filme é: %d ", filmes[i].codigo);
-            printf(" \n O titulo do filme é: %c ", filmes[i].titulo);
-            printf(" \n O genero é: %c ", filmes[i].genero);
-            printf(" \n O ano do filme é: %d", filmes[i].ano);
-            printf(" \n Quantidades é: %d", filmes[i].quantidade);
-            printf(" \n ------------------------------------------------------------------------");
-        }
-
-        printf(" \n \n");
-
-        for(int i=0; i<2; i++) {
-            printf(" Digite o código do filme: ");
-            fflush(stdin);
-            //                                   gets(&filmes[i].codigo);
-            scanf("%d%*c", &filmes[i].codigo);
-            printf(" Digite o titulo do filme: ");
-            fflush(stdin);
-            gets(&filmes[i].titulo);
-            //                                   scanf("%c%*c", &filmes[i].titulo);
-            printf(" Digite o genero do filme: ");
-            fflush(stdin);
-            gets(&filmes[i].genero);
-            //                                   scanf("%c%*c", &filmes[i].genero);
-            printf(" Digite o ano do filme: ");
-            fflush(stdin);
-            //                                   gets(&filmes[i].ano);
-            scanf("%d%*c", &filmes[i].ano);
-            printf(" Digite a quantidade: ");
-            fflush(stdin);
-            //                                   gets(&filmes[i].quantidade);
-            scanf("%d%*c", &filmes[i].quantidade);
-            printf(" \n ------------------------------------------------------------------------\n");
-        }
-
-        for(int i=0; i<2; i++) {
-            printf(" \n O código do filme é: %d ", filmes[i].codigo);
-            printf(" \n O titulo do filme é: %s ", filmes[i].titulo);
-            printf(" \n O genero do filme é: %s ", filmes[i].genero);
-            printf(" \n O ano do filme é: %d", filmes[i].ano);
-            printf(" \n A quantidade é: %d", filmes[i].quantidade);
-            printf(" \n ------------------------------------------------------------------------");
-        }
-
-        printf(" \n ");
-
-            printf(" \n Digite o codigo do filme: ");
-            scanf("%d", &codigoDigitado);
-
-            for(int i = 0; i < 2; i++){
-                if (filmes[i].codigo == codigoDigitado){
-                remover(i);
-                printf("\n Filme Alugado!!\n");
-                } else {
-                    printf("\n Filme nao encontrado!! \n");
-                }
-            }
-
-            for(int i=0; i<2; i++) {
-                printf(" \n O código do filme é: %d ", filmes[i].codigo);
-                printf(" \n O titulo do filme é: %s ", filmes[i].titulo);
-                printf(" \n O genero do filme é: %s ", filmes[i].genero);
-                printf(" \n O ano do filme é: %d", filmes[i].ano);
-                printf(" \n A quantidade é: %d", filmes[i].quantidade);
-                printf(" \n ------------------------------------------------------------------------");
-            }
-
-        printf("\n \n");*/
-
+   return 0;
 }
 
 void entrega_filmes() /* recoloca o filme na lista. */

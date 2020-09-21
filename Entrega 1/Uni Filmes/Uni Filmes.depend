@@ -3,7 +3,11 @@
 	<stdio.h>
 	<stdlib.h>
 
+<<<<<<< Updated upstream
 1600480522 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
+=======
+1600642024 source:/home/willian/grupo-06/Entrega 1/Uni Filmes/main.c
+>>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
