@@ -15,7 +15,9 @@ typedef struct Filme
 }filme;
 
 typedef struct node_filme{
-  filme titulo;
+  filme titulos;
+  struct node_filme * inicio;
+  struct node_filme * atual;
   struct node_filme * proximo;
 }node_filmes;
 
@@ -56,16 +58,16 @@ void carregarDados(node_filmes * inicio)
 
             {
             case 0:
-                inicio->titulo.titulo = token;
+                inicio->titulos.titulo = token;
                 break;
             case 1:
-                inicio->titulo.ano = token;
+                inicio->titulos.ano = token;
                 break;
             case 2:
-                inicio->titulo.quantidade = token;
+                inicio->titulos.quantidade = token;
                 break;
             case 3:
-                inicio->titulo.genero = token;
+                inicio->titulos.genero = token;
                 break;
 
             }
@@ -75,12 +77,12 @@ void carregarDados(node_filmes * inicio)
         }
 
         // gera um código sequencial para o elemento e passa para a próxima linha do arquivo
-        inicio->titulo.codigo = id++;
-        inserir(inicio, inicio->titulo);
+        inicio->titulos.codigo = id++;
+        inserir(inicio, inicio->titulos);
         i++;
 
-
   }
+
   printf("----------- Base de dados carregada ------------\n\n");
 
     fclose(arquivoEntrada);
@@ -89,7 +91,7 @@ void carregarDados(node_filmes * inicio)
 
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
 {
-    struct filme *teste;
+    /*struct filme *teste;
     int idFilme;
 
    printf("Codigo do filme:\n");
@@ -102,7 +104,7 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
         printf("nao ok \n");
     }
 
-   return 0;
+   return 0;*/
 }
 
 void entrega_filmes() /* recoloca o filme na lista. */
@@ -172,12 +174,16 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
 void mostrarListaFilmes(node_filmes * inicio){
     node_filmes * atual = inicio;
 
-    while(atual != NULL){
-        printf("%d\n", atual->titulo.codigo);
-        printf("%s\n", atual->titulo.titulo);
-        printf("%s\n", atual->titulo.quantidade);
-        printf("%s\n", atual->titulo.ano);
-        printf("%s\n", atual->titulo.genero);
+    while(atual->proximo != NULL){
+        if(atual->titulos.codigo != NULL){
+            printf("%d\n %s\n %s\n %s\n %s\n",
+            atual->titulos.codigo,
+            atual->titulos.titulo,
+            atual->titulos.quantidade,
+            atual->titulos.ano,
+            atual->titulos.genero
+            );
+        }
         atual = atual->proximo;
     }
 }
@@ -189,8 +195,8 @@ void inserir(node_filmes * inicio, filme f){
     }
 
     atual->proximo = (node_filmes *) malloc(sizeof(node_filmes));
-    atual->titulo = f;
-    atual->proximo->proximo= NULL;
+    atual->titulos = f;
+    atual->proximo->proximo = NULL;
 }
 
 int main ()
