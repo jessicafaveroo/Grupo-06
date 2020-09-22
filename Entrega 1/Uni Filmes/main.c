@@ -7,86 +7,69 @@
 typedef struct Filme
 {
     int  codigo;
-    char *titulo;
-    char *quantidade;
-    char *ano;
-    char *genero;
+    char titulo[100];
+    int quantidade;
+    int ano;
+    char genero[50];
+    struct Filme *prox;
 
-}filme;
-
-typedef struct node_filme{
-  filme titulos;
-  struct node_filme * inicio;
-  struct node_filme * atual;
-  struct node_filme * proximo;
-}node_filmes;
+} filme;
 
 
-void carregarDados(node_filmes * inicio)
-
+filme *insereLista(filme *listaFilme, char *titulo, int ano, int quantidade, char *genero)
 {
-    int  id = 0;
-    const char separador[2] = ";";
-    char *token;
-    char linha[90];
-    char *resultado;
+    filme *novo = (filme*) malloc(sizeof(filme)); // alocação dinamica, aloca um espaço de memoria para um nodo da lista
+    novo->prox = listaFilme;
+    strcpy(novo->titulo, titulo);
+    novo->ano = ano;
+    //gerar o codigo...
+    novo->codigo = rand()%42;
+    novo->quantidade = quantidade;
+    strcpy(novo->genero, genero);
+    return novo;
+}
 
-    FILE *arquivoEntrada;
-    if((arquivoEntrada = fopen("entrada.txt", "r")) == NULL)
+void imprimeLista(filme *listaFilme)
+{
+    filme *aux = listaFilme;
+    while(aux != NULL)
     {
-        printf("Erro ao abrir o arquivo.\n");
+        puts(aux->titulo);
+        printf("%d %d %s\n", aux->ano, aux->quantidade, aux->genero);
+        aux = aux->prox;
     }
+}
 
-    token = strtok(arquivoEntrada, separador);
+filme *carregarDados()
+{
+    filme *listaFilme = (filme*) malloc(sizeof(filme));
 
-    //variável i percorre cada Struct ou seja cada linha
-    int i = 0;
-    //tratamento para não ultrapassar o tamanho da lista
-    while (!feof(arquivoEntrada) && i < 42)
+    char url[]="entrada.txt",
+               titulo[100], genero[10];
+    int ano, quantidade;
+    int num_elementos;
+    FILE *arq;
+
+    arq = fopen(url, "r");
+    if(arq == NULL)
+        printf("Erro, nao foi possivel abrir o arquivo\n");
+    else
     {
-        resultado = fgets(linha, 90, arquivoEntrada);
-        if (resultado)
-            token = strtok(resultado, separador);
-
-        // estrutura de loop para um elemento inteiro do tipo filme
-        int j = 0;
-        while( token != NULL )
+        fscanf(arq, "%d", &num_elementos);
+        for(int i=0; i<num_elementos; i++)
         {
+            fscanf(arq,"%[^;]s", titulo);
+            fscanf(arq,";%d;%d;", &ano, &quantidade);
+            fscanf(arq,"%s", genero);
 
-            //insere cada atributo no elemento tipo filme
-            switch(j)
+            listaFilme = insereLista(listaFilme, titulo, ano, quantidade, genero);
 
-            {
-            case 0:
-                inicio->titulos.titulo = token;
-                break;
-            case 1:
-                inicio->titulos.ano = token;
-                break;
-            case 2:
-                inicio->titulos.quantidade = token;
-                break;
-            case 3:
-                inicio->titulos.genero = token;
-                break;
 
-            }
-
-            token = strtok(NULL, separador);
-            j++;
         }
+    }
+    fclose(arq);
 
-        // gera um código sequencial para o elemento e passa para a próxima linha do arquivo
-        inicio->titulos.codigo = id++;
-        inserir(inicio, inicio->titulos);
-        i++;
-
-  }
-
-  printf("----------- Base de dados carregada ------------\n\n");
-
-    fclose(arquivoEntrada);
-
+    return listaFilme;
 }
 
 void locacao() /*retira o filme da lista de filmes a serem locados.*/
@@ -94,8 +77,8 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
     /*struct filme *teste;
     int idFilme;
 
-   printf("Codigo do filme:\n");
-   scanf("%d", &idFilme);
+    printf("Codigo do filme:\n");
+    scanf("%d", &idFilme);
 
     for(int i = 0; i < 41; ++i){
         if(titulos[i].codigo == idFilme){
@@ -104,7 +87,7 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
         printf("nao ok \n");
     }
 
-   return 0;*/
+    return 0;*/
 }
 
 void entrega_filmes() /* recoloca o filme na lista. */
@@ -129,95 +112,92 @@ void entrega_filmes() /* recoloca o filme na lista. */
 //return(0);
 
 
-
-void busca_titulo() /* Busca filme pelo titulo. */
+int busca_titulo(filme *listaFilmes, char *chave)
 {
-    printf("Funcao Busca de um filme por titulo \n\n");
+    int t1, t2, i=0, igual=0, encontrado=-1;
+    filme *aux = listaFilmes;
+    while(aux != NULL)
+    {
+        t1 = strlen(chave);
+        t2 = strlen(aux->titulo);
+        igual=0;
+        if(t1 == t2)
+        {
+            for(i=0; i<t1-1; i++)
+            {
+
+                if(chave[i] != aux->titulo[i+1])
+                {
+                    igual=1;
+                    break;
+                }
+            }
+            if(igual == 0)
+            {
+                encontrado = 0;
+                printf("\nItem encontrado: \n");
+                printf("\nCodigo: %d \n", aux->codigo);
+                printf("\nTitulo: ");
+                puts(aux->titulo);
+                printf("\nAno: %d\n\nQuantidade: %d\n\nGenero: %s\n\n\n", aux->ano, aux->quantidade, aux->genero);
+            }
+        }
+        aux = aux->prox;
+    }
+    return encontrado;
+
 }
 
 void busca_codigo() /* Busca filme pelo codigo. */
 {
-    printf("Funcao Busca de um filme por codigo \n\n");
+    printf("Função Busca de um filme por código \n\n");
 }
 
 void busca_ano() /* Busca filme pelo ano. */
 {
-    printf("Funcao Busca de um filme por ano \n\n");
+    printf("Função Busca de um filme por ano \n\n");
 }
 
 void busca_quantidade() /* Busca filme pela quantidade. */
 {
-    printf("Funcao Busca de um filme por quantidade \n\n");
+    printf("Função Busca de um filme por quantidade \n\n");
 }
 
 void busca_genero() /* Busca filme pelo genero. */
 {
-    printf("Funcao Busca de um filme por genero \n\n");
+    printf("Função Busca de um filme por gênero \n\n");
 }
 
 void impressao() /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
 {
-    printf("Funcao Impressao \n\n");
+    printf("Função Impressão \n\n");
 }
 
 void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
 {
-    printf("Funcao Relatorios \n\n");
+    printf("Função Relatórios \n\n");
 }
 
 void acervo_completo() /* imprime um backup do acervo atual com nomes e quantidades atualizadas. */
 {
-    printf("Funcao Acervo completo \n\n");
+    printf("Função Acervo completo \n\n");
 }
 
-
-void mostrarListaFilmes(node_filmes * inicio){
-    node_filmes * atual = inicio;
-
-    while(atual->proximo != NULL){
-        if(atual->titulos.codigo != NULL){
-            printf("%d\n %s\n %s\n %s\n %s\n",
-            atual->titulos.codigo,
-            atual->titulos.titulo,
-            atual->titulos.quantidade,
-            atual->titulos.ano,
-            atual->titulos.genero
-            );
-        }
-        atual = atual->proximo;
-    }
-}
-
-void inserir(node_filmes * inicio, filme f){
-    node_filmes * atual = inicio;
-    while(atual->proximo != NULL){
-        atual = atual->proximo;
-    }
-
-    atual->proximo = (node_filmes *) malloc(sizeof(node_filmes));
-    atual->titulos = f;
-    atual->proximo->proximo = NULL;
-}
 
 int main ()
 {
+    filme *listaFilmes = NULL;
 
-    node_filmes * inicio = NULL;
-    inicio = (node_filmes *) malloc(sizeof(node_filmes));
-    if(inicio == NULL){
-        return 1;
-    }
-
-    carregarDados(inicio);
-
-    mostrarListaFilmes(inicio);
+    listaFilmes = carregarDados();
 
     int busca;
     int opcao;
+    char chave[100];
 
     do
     {
-        printf("Sistema de Locações \n\n");
+
+        printf("----- Sistema de Locações -----\n\n");
         printf("1- Locação \n");
         printf("2- Entrega de filmes \n");
         printf("3- Busca de um título \n");
@@ -252,9 +232,9 @@ int main ()
             do
             {
 
-                printf("Menu de busca: \n\n");
+                printf("----- Menu de busca -----\n\n");
                 printf("1- Buscar por código \n");
-                printf("2- Buscar por título \n");
+                printf("2- Buscar \n");
                 printf("3- Buscar por ano \n");
                 printf("4- Buscar por gênero \n");
                 printf("5- Buscar por quantidade \n");
@@ -275,7 +255,12 @@ int main ()
                     break;
 
                 case 2:
-                    busca_titulo();
+                    printf("Digite o titulo a ser buscado: \n");
+                    fgets(chave,sizeof(chave),stdin);
+                    if(busca_titulo(listaFilmes, chave) == -1)
+                    {
+                        printf("Item não encontrado\n");
+                    }
                     break;
 
                 case 3:
@@ -291,7 +276,7 @@ int main ()
                     break;
 
                 case 6:
-                    printf("você pediu para voltar ao menu principal \n\n");
+                    printf("você pediu para voltar ao menu principal. \n\n");
                     busca = 0;
                     break;
 
@@ -301,7 +286,7 @@ int main ()
                     break;
 
                 default:
-                    printf("Digite uma opção válida \n\n");
+                    printf("Digite uma opção válida. \n\n");
                 }
             }
             while(busca!= 0);
@@ -320,9 +305,9 @@ int main ()
             break;
 
         default:
-            printf("Digite uma opção válida \n\n");
-            }
+            printf("Digite uma opção válida. \n\n");
         }
-        while(opcao != 0);
-
     }
+    while(opcao != 0);
+
+}
