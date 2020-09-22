@@ -72,22 +72,57 @@ filme *carregarDados()
     return listaFilme;
 }
 
-void locacao() /*retira o filme da lista de filmes a serem locados.*/
+int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes a serem locados.*/
 {
-    /*struct filme *teste;
-    int idFilme;
 
-    printf("Codigo do filme:\n");
-    scanf("%d", &idFilme);
-
-    for(int i = 0; i < 41; ++i){
-        if(titulos[i].codigo == idFilme){
-            printf("ok \n");
+    int l1, l2;
+    int i = 0;
+    int j = 0;
+    int locado = -1;
+    filme *f = listaFilmes;
+    while(f != NULL)
+    {
+      l1 = strlen(chave);
+      l2 = strlen(f->titulo);
+      j=0;
+      if(l1 == l2)
+      {
+        for(i=0; i<l1-1; i++)
+        {
+          if(chave[i] != f->titulo[i+1])
+          {
+            j=1;
+            break;
+          }
         }
-        printf("nao ok \n");
-    }
+        if(j == 0)
+        {
+           locado = 0;
 
-    return 0;*/
+           if(f->quantidade <= 0){
+                printf("\n***Filme esgotado***.\n");
+           } else {
+             f->quantidade = f->quantidade - 1;
+           }
+
+           printf("\nFilme Aligado: \n");
+           printf("\nCodigo: %d \n", f->codigo);
+           printf("\nTitulo: ");
+           puts(f->titulo);
+
+           printf("\nAno: %d\n\nQuantidade: %d\n\nGenero: %s\n\n\n",
+           f->ano,
+           f->quantidade,
+           f->genero);
+        }
+
+      }
+        f = f->prox;
+     }
+    return locado;
+
+
+
 }
 
 void entrega_filmes() /* recoloca o filme na lista. */
@@ -221,7 +256,12 @@ int main ()
             break;
 
         case 1:
-            locacao();
+            printf("Digite um titulo de filme para locacao: \n");
+            fgets(chave,sizeof(chave),stdin);
+            if(locacao(listaFilmes, chave) == -1)
+            {
+                   //printf("Item não encontrado\n");
+            }
             break;
 
         case 2:
