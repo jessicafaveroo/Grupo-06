@@ -137,27 +137,59 @@ int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes
 
 }
 
-void entrega_filmes() /* recoloca o filme na lista. */
+int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista. */
 {
 
+    int d1, d2;
+    int i = 0;
+    int j = 0;
+    int devolucao = -1;
+    int max = 0, max1 = 0;
+    filme *f = listaFilmes;
+    while(f != NULL)
+    {
+      d1 = strlen(chave);
+      d2 = strlen(f->titulo);
+      j=0;
+      max1 = max;
+      max = f->quantidade;
+      if(d1 == d2)
+      {
+        for(i=0; i<d1-1; i++)
+        {
+          if(chave[i] != f->titulo[i+1])
+          {
+            j=1;
+            break;
+          }
+        }
+        if(j == 0)
+        {
+           devolucao = 0;
+
+           if(f->quantidade <= 0 || f->quantidade < max1){
+                f->quantidade = f->quantidade + 1;
+           } else {
+                printf("\n***Limite maximo de filmes***.\n");
+           }
+
+           printf("\nFilme Alugado: \n");
+           printf("\nCodigo: %d \n", f->codigo);
+           printf("\nTitulo: ");
+           puts(f->titulo);
+
+           printf("\nAno: %d\n\nQuantidade: %d\n\nGenero: %s\n\n\n",
+           f->ano,
+           f->quantidade,
+           f->genero);
+        }
+
+      }
+        f = f->prox;
+     }
+    return devolucao;
+
 }
-
-/* while(fread(&film, sizeof(FILME),1, arquivo_entrada_filmes)==1){
-      printf("%d", film.titulo);
-  } */
-
-//enquanto não chegar ao fim do arquivo o looping ser executado
-//   while(fgets(filme, 50, arquivo_entrada_filmes) != NULL)
-//  printf("%s", filme );
-
-
-//fecha o arquivo
-//fclose(arquivo_entrada_filmes);
-
-//stop na tela
-//  getchar();
-//return(0);
-
 
 int busca_titulo(filme *listaFilmes, char *chave)
 {
@@ -280,9 +312,13 @@ int main ()
             break;
 
         case 2:
-            entrega_filmes();
+            printf("Digite o titulo do filme para devolucao: \n");
+            fgets(chave,sizeof(chave),stdin);
+            if(entrega_filmes(listaFilmes, chave) == -1)
+            {
+                printf("Filme não encontrado para devolução");
+            }
             break;
-
         case 3:
             do
             {
