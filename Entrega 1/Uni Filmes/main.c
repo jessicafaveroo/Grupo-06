@@ -231,34 +231,9 @@ int busca_titulo(filme *listaFilmes, char *chave)
 
 }
 
-void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. */
+void busca_codigo() /* Busca filme pelo codigo. */
 {
-
-    int t1, t2, encontrado=-1;
-    filme *aux = listaFilmes;
-
-    //Busca enquanto não chegar ao fim da lista
-    while(aux != NULL)
-    {
-        //guarda a chave na variável
-        t1 = chaveInt;
-        t2 = aux->codigo;
-
-        //Se elas forem iguais, então mostra os dados do filme
-        if(t1 == t2)
-        {
-                encontrado = 0;
-                printf("\nÍtem encontrado: \n");
-                printf("\nCódigo: %d \n", aux->codigo);
-                printf("Título: ");
-                puts(aux->titulo);
-                printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-
-        }
-        aux = aux->prox;
-    }
-    return encontrado;
-
+    printf("Função Busca de um filme por código \n\n");
 }
 
 void busca_ano() /* Busca filme pelo ano. */
@@ -300,7 +275,6 @@ int main ()
 
     int busca, opcao, imprimir;
     char chave[100];
-    int chaveInt;
 
     do
     {
@@ -368,9 +342,7 @@ int main ()
                 switch(busca)
                 {
                 case 1:
-                    printf("DIgite o código a ser buscado: ");
-                    scanf("%d", &chaveInt);
-                    busca_codigo(listaFilmes, chaveInt);
+                    busca_codigo();
                     break;
 
                 case 2:
