@@ -4,7 +4,6 @@
 #include <locale.h>
 #include <ctype.h>
 
-
 typedef struct Filme
 {
     int  codigo;
@@ -32,31 +31,14 @@ filme *insereLista(filme *listaFilme, char *titulo, int ano, int quantidade, cha
     return novo;
 }
 
-void imprimeLista(filme *listaFilme)
-{
-    filme *aux = listaFilme;
-    while(aux != NULL)
-    {
-
-        printf("\nCódigo: %d \n", aux->codigo);
-        printf("Título: ");
-        puts(aux->titulo);
-        printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-        aux = aux->prox;
-
-    }
-}
-
 filme *carregarDados()
 {
     filme *listaFilme = (filme*) malloc(sizeof(filme));
-
     char url[]="entrada.txt",
-               titulo[100], genero[10];
+    titulo[100], genero[10];
     int ano, quantidade;
     int num_elementos;
     FILE *arq;
-
     arq = fopen(url, "r");
     if(arq == NULL)
         printf("Erro, não foi possível abrir o arquivo\n");
@@ -65,25 +47,20 @@ filme *carregarDados()
         fscanf(arq, "%d", &num_elementos);
         for(int i=0; i<num_elementos; i++)
         {
-
             //Ler a string até encontrar o ; para inserindo na lista
             fscanf(arq,"%[^;]s", titulo);
             fscanf(arq,";%d;%d;", &ano, &quantidade);
             fscanf(arq,"%s", genero);
 
             listaFilme = insereLista(listaFilme, titulo, ano, quantidade, genero,i);
-
-
         }
     }
     fclose(arq);
-
     return listaFilme;
 }
 
 int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes a serem locados.*/
 {
-
     int l1, l2;
     int i = 0;
     int j = 0;
@@ -127,19 +104,14 @@ int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes
                        f->quantidade,
                        f->genero);
             }
-
         }
         f = f->prox;
     }
     return locado;
-
-
-
 }
 
 int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista. */
 {
-
     int d1, d2;
     int i = 0;
     int j = 0;
@@ -166,13 +138,11 @@ int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista
         if(j == 0)
         {
            devolucao = 0;
-
            if(f->quantidade <= 0 || f->quantidade < max1){
                 f->quantidade = f->quantidade + 1;
            } else {
                 printf("\n***Limite maximo de filmes***.\n");
            }
-
            printf("\nFilme Alugado: \n");
            printf("\nCodigo: %d \n", f->codigo);
            printf("\nTitulo: ");
@@ -183,12 +153,10 @@ int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista
            f->quantidade,
            f->genero);
         }
-
       }
         f = f->prox;
      }
     return devolucao;
-
 }
 
 int busca_titulo(filme *listaFilmes, char *chave)
@@ -228,22 +196,18 @@ int busca_titulo(filme *listaFilmes, char *chave)
         aux = aux->prox;
     }
     return encontrado;
-
 }
 
 void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. */
 {
-
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
-
     //Busca enquanto não chegar ao fim da lista
     while(aux != NULL)
     {
         //guarda a chave na variável
         t1 = chaveInt;
         t2 = aux->codigo;
-
         //Se elas forem iguais, então mostra os dados do filme
         if(t1 == t2)
         {
@@ -253,7 +217,6 @@ void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. 
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-
         }
         aux = aux->prox;
     }
@@ -264,7 +227,6 @@ void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
 {
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
-
     //Busca enquanto não chegar ao fim da lista
     while(aux != NULL)
     {
@@ -281,7 +243,6 @@ void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-
         }
         aux = aux->prox;
     }
@@ -299,7 +260,6 @@ void busca_quantidade(filme *listaFilmes, int chaveInt) /* Busca filme pela quan
         //guarda a chave na variável
         t1 = chaveInt;
         t2 = aux->quantidade;
-
         //Se elas forem iguais, então mostra os dados do filme
         if(t1 == t2)
         {
@@ -309,7 +269,6 @@ void busca_quantidade(filme *listaFilmes, int chaveInt) /* Busca filme pela quan
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-
         }
         aux = aux->prox;
     }
@@ -354,12 +313,19 @@ int busca_genero(filme *listaFilmes, char *chave) /* Busca filme pelo genero. */
         aux = aux->prox;
     }
     return encontrado;
-
 }
 
-void impressao() /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
+void impressao(filme *listaFilme) /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
 {
-    printf("Função Impressão \n\n");
+        filme *aux = listaFilme;
+    while(aux != NULL)
+    {
+        printf("\nCódigo: %d \n", aux->codigo);
+        printf("Título: ");
+        puts(aux->titulo);
+        printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
+        aux = aux->prox;
+    }
 }
 
 void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
@@ -372,9 +338,7 @@ void acervo_completo() /* imprime um backup do acervo atual com nomes e quantida
     printf("Função Acervo completo \n\n");
 }
 
-
-int main ()
-{
+void menu(){
     filme *listaFilmes = NULL;
     listaFilmes = carregarDados();
     int busca, opcao, imprimir;
@@ -527,7 +491,7 @@ int main ()
                     break;
 
                 case 2:
-                    imprimeLista(listaFilmes);
+                    impressao(listaFilmes);
                     break;
 
                 case 3:
@@ -546,13 +510,12 @@ int main ()
             }
             while(imprimir!= 0);
             break;
-
         case 5:
             relatorios();
             break;
 
         case 6:
-            imprimeLista(listaFilmes);
+            impressao(listaFilmes);
             break;
 
         default:
@@ -560,5 +523,10 @@ int main ()
         }
     }
     while(opcao != 0);
+}
+
+int main ()
+{
+    menu();
 
 }
