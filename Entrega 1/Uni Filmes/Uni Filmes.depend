@@ -5,11 +5,12 @@
 
 1599790758 ated upstream
 
-1600788780 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
+1601310735 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
+	<ctype.h>
 
 1600642024 source:/home/willian/grupo-06/Entrega 1/Uni Filmes/main.c
 
