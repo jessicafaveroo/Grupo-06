@@ -4,6 +4,7 @@
 #include <locale.h>
 #include <ctype.h>
 
+
 typedef struct Filme
 {
     int  codigo;
@@ -13,7 +14,7 @@ typedef struct Filme
     char genero[100];
     struct Filme *prox;
 
-}Filme;
+} filme;
 
 //Função para inserir elemento no começo da lista
 filme *insereLista(filme *listaFilme, char *titulo, int ano, int quantidade, char *genero, int codigo)
@@ -31,41 +32,58 @@ filme *insereLista(filme *listaFilme, char *titulo, int ano, int quantidade, cha
     return novo;
 }
 
+void imprimeLista(filme *listaFilme)
+{
+    filme *aux = listaFilme;
+    while(aux != NULL)
+    {
+
+        printf("\nCódigo: %d \n", aux->codigo);
+        printf("Título: ");
+        puts(aux->titulo);
+        printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
+        aux = aux->prox;
+
+    }
+}
+
 filme *carregarDados()
 {
     filme *listaFilme = (filme*) malloc(sizeof(filme));
+
     char url[]="entrada.txt",
-    titulo[100], genero[10];
+               titulo[100], genero[10];
     int ano, quantidade;
     int num_elementos;
     FILE *arq;
+
     arq = fopen(url, "r");
     if(arq == NULL)
         printf("Erro, não foi possível abrir o arquivo\n");
     else
     {
-        resultado = fgets(linha, 90, arquivoEntrada);
-        if (resultado)
-            token = strtok(resultado, separador);
-
-        // estrutura de loop para um elemento inteiro do tipo filme
-        int j = 0;
-        while( token != NULL )
+        fscanf(arq, "%d", &num_elementos);
+        for(int i=0; i<num_elementos; i++)
         {
+
             //Ler a string até encontrar o ; para inserindo na lista
             fscanf(arq,"%[^;]s", titulo);
             fscanf(arq,";%d;%d;", &ano, &quantidade);
             fscanf(arq,"%s", genero);
 
             listaFilme = insereLista(listaFilme, titulo, ano, quantidade, genero,i);
+
+
         }
     }
     fclose(arq);
+
     return listaFilme;
 }
 
-void locacao() /*retira o filme da lista de filmes a serem locados.*/
+int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes a serem locados.*/
 {
+
     int l1, l2;
     int i = 0;
     int j = 0;
@@ -109,14 +127,19 @@ void locacao() /*retira o filme da lista de filmes a serem locados.*/
                        f->quantidade,
                        f->genero);
             }
+
         }
         f = f->prox;
     }
     return locado;
+
+
+
 }
 
 int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista. */
 {
+
     int d1, d2;
     int i = 0;
     int j = 0;
@@ -143,11 +166,13 @@ int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista
         if(j == 0)
         {
            devolucao = 0;
+
            if(f->quantidade <= 0 || f->quantidade < max1){
                 f->quantidade = f->quantidade + 1;
            } else {
                 printf("\n***Limite maximo de filmes***.\n");
            }
+
            printf("\nFilme Alugado: \n");
            printf("\nCodigo: %d \n", f->codigo);
            printf("\nTitulo: ");
@@ -158,10 +183,12 @@ int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista
            f->quantidade,
            f->genero);
         }
+
       }
         f = f->prox;
      }
     return devolucao;
+
 }
 
 int busca_titulo(filme *listaFilmes, char *chave)
@@ -201,18 +228,22 @@ int busca_titulo(filme *listaFilmes, char *chave)
         aux = aux->prox;
     }
     return encontrado;
+
 }
 
-void entrega_filmes() /* recoloca o filme na lista. */
+void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. */
 {
+
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
+
     //Busca enquanto não chegar ao fim da lista
     while(aux != NULL)
     {
         //guarda a chave na variável
         t1 = chaveInt;
         t2 = aux->codigo;
+
         //Se elas forem iguais, então mostra os dados do filme
         if(t1 == t2)
         {
@@ -222,6 +253,7 @@ void entrega_filmes() /* recoloca o filme na lista. */
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
+
         }
         aux = aux->prox;
     }
@@ -232,6 +264,7 @@ void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
 {
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
+
     //Busca enquanto não chegar ao fim da lista
     while(aux != NULL)
     {
@@ -248,16 +281,17 @@ void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
+
         }
         aux = aux->prox;
     }
     return encontrado;
 }
 
-void busca_codigo() /* Busca filme pelo codigo. */
+void busca_quantidade(filme *listaFilmes, int chaveInt) /* Busca filme pela quantidade. */
 {
-    printf("Funcao Busca de um filme por codigo \n\n");
-}
+    int t1, t2, encontrado=-1;
+    filme *aux = listaFilmes;
 
     //Busca enquanto não chegar ao fim da lista
     while(aux != NULL)
@@ -265,6 +299,7 @@ void busca_codigo() /* Busca filme pelo codigo. */
         //guarda a chave na variável
         t1 = chaveInt;
         t2 = aux->quantidade;
+
         //Se elas forem iguais, então mostra os dados do filme
         if(t1 == t2)
         {
@@ -274,16 +309,15 @@ void busca_codigo() /* Busca filme pelo codigo. */
                 printf("Título: ");
                 puts(aux->titulo);
                 printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
+
         }
         aux = aux->prox;
     }
     return encontrado;
 }
 
-void busca_quantidade() /* Busca filme pela quantidade. */
+int busca_genero(filme *listaFilmes, char *chave) /* Busca filme pelo genero. */
 {
-    printf("Funcao Busca de um filme por quantidade \n\n");
-}
 
     int t1, t2, i=0, igual=0, encontrado=-1;
     filme *aux = listaFilmes;
@@ -320,32 +354,27 @@ void busca_quantidade() /* Busca filme pela quantidade. */
         aux = aux->prox;
     }
     return encontrado;
+
 }
 
-void impressao(filme *listaFilme) /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
+void impressao() /* mostra as informações de um filme específico ou de todos os filmes do acervo. */
 {
-        filme *aux = listaFilme;
-    while(aux != NULL)
-    {
-        printf("\nCódigo: %d \n", aux->codigo);
-        printf("Título: ");
-        puts(aux->titulo);
-        printf("Ano: %d\nQuantidade: %d\nGênero: %s\n\n", aux->ano, aux->quantidade, aux->genero);
-        aux = aux->prox;
-    }
+    printf("Função Impressão \n\n");
 }
 
 void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
 {
-    printf("Funcao Relatorios \n\n");
+    printf("Função Relatórios \n\n");
 }
 
 void acervo_completo() /* imprime um backup do acervo atual com nomes e quantidades atualizadas. */
 {
-    printf("Funcao Acervo completo \n\n");
+    printf("Função Acervo completo \n\n");
 }
 
-void menu(){
+
+int main ()
+{
     filme *listaFilmes = NULL;
     listaFilmes = carregarDados();
     int busca, opcao, imprimir;
@@ -355,12 +384,7 @@ void menu(){
     do
     {
 
-    int busca;
-    int opcao;
-
-    do
-    {
-        printf("Sistema de Locações \n\n");
+        printf("----- Sistema de Locações -----\n\n");
         printf("1- Locação \n");
         printf("2- Entrega de filmes \n");
         printf("3- Buscas \n");
@@ -503,7 +527,7 @@ void menu(){
                     break;
 
                 case 2:
-                    impressao(listaFilmes);
+                    imprimeLista(listaFilmes);
                     break;
 
                 case 3:
@@ -522,26 +546,19 @@ void menu(){
             }
             while(imprimir!= 0);
             break;
+
         case 5:
             relatorios();
             break;
 
         case 6:
-            impressao(listaFilmes);
+            imprimeLista(listaFilmes);
             break;
 
         default:
-            printf("Digite uma opção válida \n\n");
-            }
+            printf("Digite uma opção válida. \n\n");
         }
-        while(opcao != 0);
-
     }
     while(opcao != 0);
-}
-
-int main ()
-{
-    menu();
 
 }
