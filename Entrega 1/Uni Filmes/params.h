@@ -27,11 +27,11 @@ int entrega_filmes(filme *listaFilmes, char *chave);
 
 int busca_titulo(filme *listaFilmes, char *chave);
 
-void busca_codigo(filme *listaFilmes, int chaveInt);
+int busca_codigo(filme *listaFilmes, int chaveInt);
 
-void busca_ano(filme *listaFilmes, int chaveInt);
+int busca_ano(filme *listaFilmes, int chaveInt);
 
-void busca_quantidade(filme *listaFilmes, int chaveInt);
+int busca_quantidade(filme *listaFilmes, int chaveInt);
 
 int busca_genero(filme *listaFilmes, char *chave);
 

@@ -200,7 +200,7 @@ int busca_titulo(filme *listaFilmes, char *chave)
 
 }
 
-void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. */
+int busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. */
 {
 
     int t1, t2, encontrado=-1;
@@ -229,7 +229,7 @@ void busca_codigo(filme *listaFilmes, int chaveInt) /* Busca filme pelo codigo. 
     return encontrado;
 }
 
-void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
+int busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
 {
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
@@ -257,7 +257,7 @@ void busca_ano(filme *listaFilmes, int chaveInt) /* Busca filme pelo ano. */
     return encontrado;
 }
 
-void busca_quantidade(filme *listaFilmes, int chaveInt) /* Busca filme pela quantidade. */
+int busca_quantidade(filme *listaFilmes, int chaveInt) /* Busca filme pela quantidade. */
 {
     int t1, t2, encontrado=-1;
     filme *aux = listaFilmes;
