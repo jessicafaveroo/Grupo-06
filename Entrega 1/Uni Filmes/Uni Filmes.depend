@@ -1,15 +1,15 @@
 # depslib dependency file v1.0
-1599790758 source:/home/thiagosalvador/Samuel/RPIII/grupo-06/Entrega 1/Uni Filmes/main.c
-	<stdio.h>
-	<stdlib.h>
-
-1599790758 ated upstream
-
-1600788780 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
+1601307232 source:/home/thiagosalvador/Samuel/RPIII/grupo-06/Entrega 1/Uni Filmes/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<locale.h>
+	<ctype.h>
+
+1599790758 ated upstream
+
+1601312209 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/main.c
+	"params.h"
 
 1600642024 source:/home/willian/grupo-06/Entrega 1/Uni Filmes/main.c
 
@@ -18,4 +18,14 @@
 	<stdlib.h>
 	<string.h>
 	<locale.h>
+
+1601312208 source:/home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/funcs.c
+	"params.h"
+
+1601312874 /home/jessica/Documentos/grupo-06/Entrega 1/Uni Filmes/params.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<locale.h>
+	<ctype.h>
 
