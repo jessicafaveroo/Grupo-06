@@ -330,7 +330,7 @@ void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
 void menu(){
 filme *listaFilmes = NULL;
     listaFilmes = carregarDados();
-    int busca, opcao, imprimir;
+    int busca, opcao, imprimir, relatorio;
     char chave[100];
     int chaveInt;
 
@@ -512,11 +512,11 @@ filme *listaFilmes = NULL;
                 printf("0- Sair \n\n");
                 printf("Digite a opção desejada: ");
                 /*fflush(stdin);*/
-                scanf("%d", &imprimir);
+                scanf("%d", &relatorio);
                 __fpurge(stdin);
                 system("clear");
 
-                switch(imprimir)
+                switch(relatorio)
                 {
                 case 1:
                     printf("Digite o ano a ser buscado: ");
@@ -535,7 +535,7 @@ filme *listaFilmes = NULL;
 
                 case 3:
                     printf("você pediu para voltar ao menu principal. \n\n");
-                    imprimir = 0;
+                    relatorio = 0;
                     break;
 
                 case 0:
@@ -547,7 +547,7 @@ filme *listaFilmes = NULL;
                     printf("Digite uma opção válida. \n\n");
                 }
             }
-            while(imprimir!= 0);
+            while(relatorio!= 0);
             break;
 
         case 6:
