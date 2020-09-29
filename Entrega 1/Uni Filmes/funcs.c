@@ -50,29 +50,22 @@ filme *carregarDados()
     return listaFilme;
 }
 
-int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes a serem locados.*/
+int locacao(filme *listaFilmes, int *chaveInt) /*retira o filme da lista de filmes a serem locados.*/
 {
 
     int l1, l2;
-    int i = 0;
     int j = 0;
+    int quantidadeTotal;
     int locado = -1;
     filme *f = listaFilmes;
     while(f != NULL)
     {
-        l1 = strlen(chave);
-        l2 = strlen(f->titulo);
+        l1 = chaveInt;
+        l2 = f->codigo;
         j=0;
         if(l1 == l2)
         {
-            for(i=0; i<l1-1; i++)
-            {
-                if(chave[i] != f->titulo[i+1])
-                {
-                    j=1;
-                    break;
-                }
-            }
+            quantidadeTotal = listaFilmes->quantidade;
             if(j == 0)
             {
                 locado = 0;
@@ -101,63 +94,51 @@ int locacao(filme *listaFilmes, char *chave) /*retira o filme da lista de filmes
         f = f->prox;
     }
     return locado;
-
-
-
 }
 
-int entrega_filmes(filme *listaFilmes, char *chave) /* recoloca o filme na lista. */
+int entrega_filmes(filme *listaFilmesAlugadosParam, int *chaveInt) /* recoloca o filme na lista. */
 {
 
-    int d1, d2;
-    int i = 0;
-    int j = 0;
+    int codigoDigitado, codigoFilmeAlugado;
     int devolucao = -1;
-    int max = 0, max1 = 0;
-    filme *f = listaFilmes;
-    while(f != NULL)
-    {
-      d1 = strlen(chave);
-      d2 = strlen(f->titulo);
-      j=0;
-      max1 = max;
-      max = f->quantidade;
-      if(d1 == d2)
-      {
-        for(i=0; i<d1-1; i++)
-        {
-          if(chave[i] != f->titulo[i+1])
-          {
-            j=1;
-            break;
-          }
-        }
-        if(j == 0)
-        {
-           devolucao = 0;
+    int max, quantidadeTotal;
+    filme *filmesAlugados = listaFilmesAlugadosParam;
 
-           if(f->quantidade <= 0 || f->quantidade < max1){
-                f->quantidade = f->quantidade + 1;
-           } else {
+    filme *listaFilmes = NULL;
+    listaFilmes = carregarDados();
+
+    codigoDigitado = chaveInt;
+
+    while(filmesAlugados != NULL) {
+
+        codigoFilmeAlugado = filmesAlugados->codigo;
+        if(codigoDigitado == codigoFilmeAlugado)
+        {
+            devolucao = 0;
+            max = listaFilmes->quantidade;
+            quantidadeTotal = max;
+
+            if(filmesAlugados->quantidade >= 0 && filmesAlugados->quantidade < quantidadeTotal){
+                filmesAlugados->quantidade = filmesAlugados->quantidade + 1;
+
+                printf("\nFilme encontrado: \n");
+                printf("\nCodigo: %d \n", filmesAlugados->codigo);
+                printf("\nTitulo: ");
+                puts(filmesAlugados->titulo);
+                printf("\nAno: %d\n\nQuantidade: %d\n\nGenero: %s\n\n\n",
+                filmesAlugados->ano,
+                filmesAlugados->quantidade,
+                filmesAlugados->genero);
+                break;
+
+            } else {
                 printf("\n***Limite maximo de filmes***.\n");
-           }
-
-           printf("\nFilme Alugado: \n");
-           printf("\nCodigo: %d \n", f->codigo);
-           printf("\nTitulo: ");
-           puts(f->titulo);
-
-           printf("\nAno: %d\n\nQuantidade: %d\n\nGenero: %s\n\n\n",
-           f->ano,
-           f->quantidade,
-           f->genero);
+            }
         }
-
-      }
-        f = f->prox;
-     }
+            filmesAlugados = filmesAlugados->prox;
+            listaFilmes = listaFilmes->prox;
+    }
     return devolucao;
-
 }
 
 int busca_titulo(filme *listaFilmes, char *chave)
@@ -380,22 +361,23 @@ filme *listaFilmes = NULL;
             break;
 
         case 1:
-            printf("Digite um titulo de filme para locacao: \n");
-            fgets(chave,sizeof(chave),stdin);
-            if(locacao(listaFilmes, chave) == -1)
+            printf("Digite um codigo de filme para locacao: \n");
+            scanf("%d", &chaveInt);
+            if(locacao(listaFilmes, chaveInt) == -1)
             {
                 printf("\nÍtem não encontrado\n");
             }
             break;
 
         case 2:
-            printf("Digite o titulo do filme para devolucao: \n");
-            fgets(chave,sizeof(chave),stdin);
-            if(entrega_filmes(listaFilmes, chave) == -1)
+            printf("Digite o codigo do filme para devolucao: \n");
+            scanf("%d", &chaveInt);
+            if(entrega_filmes(listaFilmes, chaveInt) == -1)
             {
-                printf("Filme não encontrado para devolução");
+                printf("\nFilme não encontrado para devolução\n\n");
             }
             break;
+
         case 3:
             do
             {
