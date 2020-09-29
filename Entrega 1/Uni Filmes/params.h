@@ -21,9 +21,9 @@ filme *insereLista(filme *listaFilme, char *titulo, int ano, int quantidade, cha
 
 filme *carregarDados();
 
-int locacao(filme *listaFilmes, char *chave);
+int locacao(filme *listaFilmes, int *chaveInt);
 
-int entrega_filmes(filme *listaFilmes, char *chave);
+int entrega_filmes(filme *listaFilmes, int *chaveInt);
 
 int busca_titulo(filme *listaFilmes, char *chave);
 
