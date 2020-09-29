@@ -330,7 +330,7 @@ void relatorios() /* gera uma lista de filmes pesquisados por ano ou gênero. */
 void menu(){
 filme *listaFilmes = NULL;
     listaFilmes = carregarDados();
-    int busca, opcao, imprimir;
+    int busca, opcao, imprimir, relatorio;
     char chave[100];
     int chaveInt;
 
@@ -502,7 +502,52 @@ filme *listaFilmes = NULL;
             break;
 
         case 5:
-            relatorios();
+            do
+            {
+
+                printf("----- Opções de relatório -----\n\n");
+                printf("1- Digite o ano a ser buscado:  \n");
+                printf("2- Digite o gênero a ser buscado: \n");
+                printf("3- voltar \n");
+                printf("0- Sair \n\n");
+                printf("Digite a opção desejada: ");
+                /*fflush(stdin);*/
+                scanf("%d", &relatorio);
+                __fpurge(stdin);
+                system("clear");
+
+                switch(relatorio)
+                {
+                case 1:
+                    printf("Digite o ano a ser buscado: ");
+                    scanf("%d", &chaveInt);
+                    busca_ano(listaFilmes, chaveInt);
+                    break;
+
+                case 2:
+                    printf("Digite o gênero a ser buscado: \n");
+                    fgets(chave,sizeof(chave),stdin);
+                    if(busca_genero(listaFilmes, chave) == -1)
+                    {
+                        printf("\nÍtem não encontrado\n\n");
+                    }
+                    break;
+
+                case 3:
+                    printf("você pediu para voltar ao menu principal. \n\n");
+                    relatorio = 0;
+                    break;
+
+                case 0:
+                    printf("Você pediu para sair, fechando programa...\n");
+                    exit(0);
+                    break;
+
+                default:
+                    printf("Digite uma opção válida. \n\n");
+                }
+            }
+            while(relatorio!= 0);
             break;
 
         case 6:
