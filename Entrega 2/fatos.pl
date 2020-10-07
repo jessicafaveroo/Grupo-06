@@ -37,20 +37,21 @@ horario('Sexta', horario_2).
 horario('Sexta', horario_3).
 horario('Sexta', horario_4).
 
-% Declaração fato Semestre e Disciplina
+% Declaração fato Semestre
 semestre('1º Semestre', 1).
 semestre('3º Semestre', 3).
 
-disciplina_semestre('Inovação e Criatividade', 3).
-disciplina_semestre('Análise e Projeto de Software', 3).
-disciplina_semestre('Resolução de Problemas I (Eng. Requisitos - Extensão)', 1).
-disciplina_semestre('Resolução de Problemas III', 3).
-disciplina_semestre('Algoritmos e Programação -- ES', 1).
-disciplina_semestre('Arquitetura e Organização de Computadores -- ES', 3).
-disciplina_semestre('Estruturas de Dados -- ES', 3).
-disciplina_semestre('Linguagens Formais -- ES', 3).
-disciplina_semestre('Lógica Matemática -- ES', 1).
-disciplina_semestre('Matemática Discreta -- ES', 1).
+% Declaração fato Disciplina Crédito e Semestre
+disciplina('Inovação e Criatividade', 2, 3).
+disciplina('Análise e Projeto de Software', 4, 3).
+disciplina('Resolução de Problemas I (Eng. Requisitos - Extensão)', 8, 1).
+disciplina('Resolução de Problemas III', 8, 3).
+disciplina('Algoritmos e Programação -- ES', 8, 1).
+disciplina('Arquitetura e Organização de Computadores -- ES', 2, 3).
+disciplina('Estruturas de Dados -- ES', 4, 3).
+disciplina('Linguagens Formais -- ES', 4, 3).
+disciplina('Lógica Matemática -- ES', 4, 1).
+disciplina('Matemática Discreta – ES', 4, 1).
 
 % Declaração fato Preferencias Professor 
 professor_preferencia('Professor 1', 'Inovação e Criatividade', 5).
