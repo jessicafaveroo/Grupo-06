@@ -11,19 +11,31 @@ oferta_disciplina(Disciplina, (Semestre)).
 disciplina(Disciplina, Creditos)
 
 % Declaração fato horário
-horario_1('18:30 - 20:20').
-horario_2('20:30 - 22:20').
+horario_1('18:30').
+horario_2('19:30').
+horario_3('20:30').
+horario_4('21:30').
 
 horario('Segunda', horario_1).
 horario('Segunda', horario_2).
+horario('Segunda', horario_3).
+horario('Segunda', horario_4).
 horario('Terça', horario_1).
 horario('Terça', horario_2).
+horario('Terça', horario_3).
+horario('Terça', horario_4).
 horario('Quarta', horario_1).
 horario('Quarta', horario_2).
+horario('Quarta', horario_3).
+horario('Quarta', horario_4).
 horario('Quinta', horario_1).
 horario('Quinta', horario_2).
+horario('Quinta', horario_3).
+horario('Quinta', horario_4).
 horario('Sexta', horario_1).
 horario('Sexta', horario_2).
+horario('Sexta', horario_3).
+horario('Sexta', horario_4).
 
 % Declaração fato Semestre e Disciplina
 semestre('1º Semestre', 1).
