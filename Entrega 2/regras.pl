@@ -1,5 +1,7 @@
 %% Regras
 
+:- [fatos].
+
 ministra(PROFESSOR, MATERIA, H):-
         professor_preferencia(PROFESSOR, MATERIA, 1),
         disciplina_semestre(MATERIA, 1); disciplina_semestre(MATERIA, 3), %%Regra 6
