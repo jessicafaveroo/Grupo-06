@@ -8,7 +8,7 @@ limite_maximo_professor(LimiteMaximoProfessor).
 oferta_disciplina(Disciplina, (Semestre)).
 
 % Fatos independentes semestre
-disciplina(Disciplina, Creditos)
+disciplina(Disciplina, Creditos).
 
 % Declaração fato horário
 horario_1('18:30').
@@ -51,7 +51,7 @@ disciplina('Arquitetura e Organização de Computadores -- ES', 2, 3).
 disciplina('Estruturas de Dados -- ES', 4, 3).
 disciplina('Linguagens Formais -- ES', 4, 3).
 disciplina('Lógica Matemática -- ES', 4, 1).
-disciplina('Matemática Discreta – ES', 4, 1).
+disciplina('Matemática Discreta -- ES', 4, 1).
 
 % Declaração fato Preferencias Professor 
 professor_preferencia('Professor 1', 'Inovação e Criatividade', 5).
