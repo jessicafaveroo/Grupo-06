@@ -4,44 +4,100 @@
 
 ministra(PROFESSOR, MATERIA):-
     professor_preferencia(PROFESSOR, MATERIA, 1),
-    disciplina(MATERIA, CREDITOS, 1).
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 1),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
 
 ministra(PROFESSOR, MATERIA):-
     professor_preferencia(PROFESSOR, MATERIA, 2),
-    disciplina(MATERIA, CREDITOS, 1).
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 2),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
 
 ministra(PROFESSOR, MATERIA):-
     professor_preferencia(PROFESSOR, MATERIA, 3),
-    disciplina(MATERIA, CREDITOS, 1).
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 3),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
 
 ministra(PROFESSOR, MATERIA):-
     professor_preferencia(PROFESSOR, MATERIA, 4),
-    disciplina(MATERIA, CREDITOS, 1).
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 4),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_4),
+    horario(DIA, horario_3).
 
 ministra(PROFESSOR, MATERIA):-
     professor_preferencia(PROFESSOR, MATERIA, 5),
-    disciplina(MATERIA, CREDITOS, 1).
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 5),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 'Resolução de Problemas I (Eng. Requisitos - Extensão'),
+    disciplina(MATERIA, CREDITOS, 1),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 'Resolução de Problemas III'),
+    disciplina(MATERIA, CREDITOS, 3),
+    horario(DIA, horario_1),
+    horario(DIA, horario_2),
+    horario(DIA, horario_3),
+    horario(DIA, horario_4).
 
 
 ministra(PROFESSOR, MATERIA) :-
-        professor_preferencia(PROFESSOR, MATERIA, 1),
-        disciplina(MATERIA, CREDITOS, 3).
+    professor_preferencia(PROFESSOR, MATERIA, 1),
+    disciplina(MATERIA, CREDITOS, 3).
     
-    ministra(PROFESSOR, MATERIA) :-
-        professor_preferencia(PROFESSOR, MATERIA, 2),
-        disciplina(MATERIA, CREDITOS, 3).
+ministra(PROFESSOR, MATERIA) :-
+    professor_preferencia(PROFESSOR, MATERIA, 2),
+    disciplina(MATERIA, CREDITOS, 3).
     
-    ministra(PROFESSOR, MATERIA) :-
-        professor_preferencia(PROFESSOR, MATERIA, 3),
-        disciplina(MATERIA, CREDITOS, 3).
+ministra(PROFESSOR, MATERIA) :-
+    professor_preferencia(PROFESSOR, MATERIA, 3),
+    disciplina(MATERIA, CREDITOS, 3).
     
-    ministra(PROFESSOR, MATERIA) :-
-        professor_preferencia(PROFESSOR, MATERIA, 4),
-        disciplina(MATERIA, CREDITOS, 3).
+ministra(PROFESSOR, MATERIA) :-
+    professor_preferencia(PROFESSOR, MATERIA, 4),
+    disciplina(MATERIA, CREDITOS, 3).
     
-    ministra(PROFESSOR, MATERIA) :-
-        professor_preferencia(PROFESSOR, MATERIA, 5),
-        disciplina(MATERIA, CREDITOS, 3).
+ministra(PROFESSOR, MATERIA) :-
+    professor_preferencia(PROFESSOR, MATERIA, 5),
+    disciplina(MATERIA, CREDITOS, 3).
 
 %Regra 2
 ministra_no_horario(DIA, HORARIO_ESCOLHIDO):-
