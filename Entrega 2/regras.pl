@@ -1,26 +1,67 @@
 %% Regras
 
-ministra(PROFESSOR, MATERIA, H):-
+:- [fatos].
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 1),
+    disciplina(MATERIA, CREDITOS, 1).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 2),
+    disciplina(MATERIA, CREDITOS, 1).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 3),
+    disciplina(MATERIA, CREDITOS, 1).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 4),
+    disciplina(MATERIA, CREDITOS, 1).
+
+ministra(PROFESSOR, MATERIA):-
+    professor_preferencia(PROFESSOR, MATERIA, 5),
+    disciplina(MATERIA, CREDITOS, 1).
+
+
+ministra(PROFESSOR, MATERIA) :-
         professor_preferencia(PROFESSOR, MATERIA, 1),
-        disciplina_semestre(MATERIA, 1); disciplina_semestre(MATERIA, 3), %%Regra 6
-				disc_mesmo_horario :- disciplina_semestre(MATERIA, 1), disciplina_semestre(MATERIA, 3) :- horario(U, H) < 1. %%Regra 2
-
-ministra(PROFESSOR, MATERIA, H):-
+        disciplina(MATERIA, CREDITOS, 3).
+    
+    ministra(PROFESSOR, MATERIA) :-
         professor_preferencia(PROFESSOR, MATERIA, 2),
-        disciplina_semestre(MATERIA, 1); disciplina_semestre(Y, 3), %%Regra 6
-				disc_mesmo_horario :- disciplina_semestre(MATERIA, 1), disciplina_semestre(MATERIA, 3) :- horario(U, H) < 1. %%Regra 2
-
-ministra(PROFESSOR, MATERIA, H):-
+        disciplina(MATERIA, CREDITOS, 3).
+    
+    ministra(PROFESSOR, MATERIA) :-
         professor_preferencia(PROFESSOR, MATERIA, 3),
-        disciplina_semestre(MATERIA, 1); disciplina_semestre(MATERIA, 3), %%Regra 6
-				disc_mesmo_horario :- disciplina_semestre(MATERIA, 1), disciplina_semestre(MATERIA, 3) :- horario(U, H) < 1. %%Regra 2
-
-ministra(PROFESSOR, MATERIA, H):-
+        disciplina(MATERIA, CREDITOS, 3).
+    
+    ministra(PROFESSOR, MATERIA) :-
         professor_preferencia(PROFESSOR, MATERIA, 4),
-        disciplina_semestre(MATERIA, 1); disciplina_semestre(MATERIA, 3), %%Regra 6
-				disc_mesmo_horario :- disciplina_semestre(MATERIA, 1), disciplina_semestre(MATERIA, 3) :- horario(U, H) < 1. %%Regra 2
-
-ministra(PROFESSOR, MATERIA, H):-
+        disciplina(MATERIA, CREDITOS, 3).
+    
+    ministra(PROFESSOR, MATERIA) :-
         professor_preferencia(PROFESSOR, MATERIA, 5),
-        disciplina_semestre(MATERIA, 1); disciplina_semestre(MATERIA, 3), %%Regra 6
-				disc_mesmo_horario :- disciplina_semestre(MATERIA, 1), disciplina_semestre(MATERIA, 3) :- horario(U, H) < 1. %%Regra 2
+        disciplina(MATERIA, CREDITOS, 3).
+
+%Regra 2
+ministra_no_horario(DIA, HORARIO_ESCOLHIDO):-
+	horario(DIA, horario_1), %seleciona pelo horario_1
+	write(professor_preferencia(PROFESSOR, MATERIA, 1)), nl. %pega o prof com maior preferência para dar aula.
+
+ministra_no_horario(DIA, HORARIO_ESCOLHIDO):-
+	horario(DIA, horario_2), %seleciona pelo horario_2
+	write(professor_preferencia(PROFESSOR, MATERIA, 1)), nl. %pega o prof com maior preferência para dar aula.
+
+ministra_no_horario(DIA, HORARIO_ESCOLHIDO):-
+	horario(DIA, HORARIO_ESCOLHIDO), %seleciona pelo horario_3
+	professor_preferencia(write(PROFESSOR), MATERIA, 1), nl.%pega o prof com maior preferência para dar aula
+
+ministra_no_horario(DIA, HORARIO_ESCOLHIDO):-
+	horario(DIA, horario_4), %seleciona pelo horario_4
+	write(professor_preferencia(PROFESSOR, MATERIA, 1)), nl. %pega o prof com maior preferência para dar aula.
+
+/* OBS sobre regra 2
+Se o argumento contém variáveis não instanciadas, estas serão
+impressas com seus nomes internos, geralmente consistindo de um “_” seguido
+de um código interno alfanumérico. Além de write, existe em Prolog o predicado pré-definido nl, sem arugmento, que causa mudança de linha na impressão
+(newline). Assim, se quisermos dividir a saída em várias linhas, devemos usar nl:*/
