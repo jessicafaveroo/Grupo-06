@@ -121,3 +121,10 @@ Se o argumento contém variáveis não instanciadas, estas serão
 impressas com seus nomes internos, geralmente consistindo de um “_” seguido
 de um código interno alfanumérico. Além de write, existe em Prolog o predicado pré-definido nl, sem arugmento, que causa mudança de linha na impressão
 (newline). Assim, se quisermos dividir a saída em várias linhas, devemos usar nl:*/
+
+limite_maximo_creditos(Professor, Disciplina, NumCreditosAlocados):-
+professor(Professor),
+limite_maximo_professor(Limite),
+disciplina(Disciplina, Creditos),
+N is NumCreditosAlocados + Creditos,
+N =< Limite.

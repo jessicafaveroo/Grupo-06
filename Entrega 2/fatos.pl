@@ -296,7 +296,9 @@ professor_preferencia('Professor 22', 'Linguagens Formais -- ES', 5).
 professor_preferencia('Professor 22', 'Lógica Matemática -- ES', 5).
 professor_preferencia('Professor 22', 'Matemática Discreta -- ES', 5).
 
-hhorarios_por_semana(20).
+limite_maximo_professor(12).
+
+horarios_por_semana(20).
 horarios_por_dia(4).
 
 turma_materia_professor_frequencia('2018', 'Inovação e Criatividade', PROFESSOR1, 1).
