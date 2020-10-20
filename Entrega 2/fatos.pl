@@ -295,3 +295,19 @@ professor_preferencia('Professor 22', 'Estruturas de Dados -- ES', 4).
 professor_preferencia('Professor 22', 'Linguagens Formais -- ES', 5).
 professor_preferencia('Professor 22', 'Lógica Matemática -- ES', 5).
 professor_preferencia('Professor 22', 'Matemática Discreta -- ES', 5).
+
+hhorarios_por_semana(20).
+horarios_por_dia(4).
+
+turma_materia_professor_frequencia('2018', 'Inovação e Criatividade', PROFESSOR1, 1).
+turma_materia_professor_frequencia('2018', 'Análise e Projeto de Software', PROFESSOR1, 3).
+turma_materia_professor_frequencia('2018', 'Resolução de Problemas I (Eng. Requisitos - Extensão)', PROFESSOR1, 4).
+turma_materia_professor_frequencia('2018', 'Resolução de Problemas III', PROFESSOR2, 4).
+turma_materia_professor_frequencia('2018', 'Algoritmos e Programação -- ES', PROFESSOR1, 3).
+turma_materia_professor_frequencia('2018', 'Estruturas de Dados -- ES', PROFESSOR3, 2).
+turma_materia_professor_frequencia('2018', 'Arquitetura e Organização de Computadores -- ES', PROFESSOR4, 4).
+
+aulas_seguidas(TURMA, 'Resolução de Problemas I (Eng. Requisitos - Extensão)', 1, 2).
+
+turma_livre('2018', 2).
+turma_livre('2018', 2).
